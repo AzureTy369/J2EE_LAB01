@@ -1,0 +1,3 @@
+com\example\captcha\CaptchaApplication.class
+com\example\captcha\controller\CaptchaController.class
+com\example\captcha\service\CaptchaService.class

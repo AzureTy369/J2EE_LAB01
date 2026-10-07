@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; margin-top: 12px; }
+        th, td { border: 1px solid #999; padding: 6px 12px; text-align: left; }
+        th { background: #eee; }
+        code { background: #f4f4f4; padding: 2px 4px; }
+    </style>
+</head>
+<body>
+<h1>Hello !</h1>
+<p>Welcome to <span th:text="${appName}">Our App</span></p>
+
+<h2>Danh sách sách (đọc từ CSDL H2 qua Spring Data JPA)</h2>
+<table>
+    <tr><th>ID</th><th>Title</th><th>Author</th></tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.title}">Title</td>
+        <td th:text="${book.author}">Author</td>
+    </tr>
+</table>
+
+<h2>Thử REST API</h2>
+<ul>
+    <li><a th:href="@{/api/books}">GET /api/books</a>: lấy tất cả sách (JSON)</li>
+    <li><a th:href="@{/api/books/1}">GET /api/books/1</a>: lấy sách có id = 1</li>
+    <li><a th:href="@{/api/books/title/Clean Code}">GET /api/books/title/Clean Code</a>: tìm theo tên</li>
+    <li>POST / PUT / DELETE <code>/api/books</code>: cần tài khoản <code>admin / admin123</code></li>
+    <li><a th:href="@{/h2-console}">H2 console</a>: JDBC URL <code>jdbc:h2:mem:bootapp</code>, user <code>sa</code>, mật khẩu để trống</li>
+</ul>
+</body>
+</html>

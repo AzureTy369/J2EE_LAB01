@@ -1,0 +1,4 @@
+com\example\thymeleaf\controller\MainController.class
+com\example\thymeleaf\model\Person.class
+com\example\thymeleaf\SpringBootThymeleafApplication.class
+com\example\thymeleaf\form\PersonForm.class

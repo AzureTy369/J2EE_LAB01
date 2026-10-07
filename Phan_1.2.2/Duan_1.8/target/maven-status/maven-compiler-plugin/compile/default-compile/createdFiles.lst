@@ -1,0 +1,9 @@
+com\example\bootstrap\web\exception\BookIdMismatchException.class
+com\example\bootstrap\web\SimpleController.class
+com\example\bootstrap\SpringBootBootstrapApplication.class
+com\example\bootstrap\config\SecurityConfig.class
+com\example\bootstrap\persistence\model\Book.class
+com\example\bootstrap\web\RestExceptionHandler.class
+com\example\bootstrap\web\exception\BookNotFoundException.class
+com\example\bootstrap\persistence\repo\BookRepository.class
+com\example\bootstrap\web\BookController.class
