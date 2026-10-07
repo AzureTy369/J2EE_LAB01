@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gửi phản hồi về chất lượng dịch vụ">
+    <title>Phản hồi dịch vụ | Carely</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/feedback.css}">
+</head>
+<body>
+<header class="nav container">
+    <a class="logo" href="/"><span>✦</span> carely</a>
+    <div class="nav-note"><i></i> Chúng tôi luôn lắng nghe bạn</div>
+</header>
+
+<main class="layout container">
+    <section class="intro">
+        <p class="overline">PHẢN HỒI KHÁCH HÀNG</p>
+        <h1>Ý kiến của bạn<br><em>tạo nên khác biệt.</em></h1>
+        <p class="lead">Hãy chia sẻ trải nghiệm của bạn với dịch vụ Carely. Mỗi phản hồi là một bước tiến giúp chúng tôi phục vụ bạn tốt hơn.</p>
+        <div class="trust">
+            <div class="trust-icon">♥</div>
+            <div><strong>Cam kết cải thiện</strong><br><span>Phản hồi của bạn được đội ngũ xem xét trong 24 giờ.</span></div>
+        </div>
+        <div class="decor"><span>✧</span><span>+</span><span>✦</span></div>
+    </section>
+
+    <section class="form-card">
+        <div th:if="${sent}" class="success" role="status">
+            <span class="success-icon">✓</span>
+            <div><strong>Cảm ơn bạn đã phản hồi!</strong><br><span>Ý kiến của bạn đã được ghi nhận thành công.</span></div>
+        </div>
+        <form th:action="@{/feedback}" th:object="${feedback}" method="post">
+            <div class="form-head"><span>01</span><h2>Đánh giá trải nghiệm</h2></div>
+            <p class="question">Bạn cảm thấy dịch vụ hôm nay thế nào?</p>
+            <div class="rating">
+                <input type="radio" id="star5" th:field="*{rating}" value="5"><label for="star5" title="Rất hài lòng">★</label>
+                <input type="radio" id="star4" th:field="*{rating}" value="4"><label for="star4" title="Hài lòng">★</label>
+                <input type="radio" id="star3" th:field="*{rating}" value="3"><label for="star3" title="Bình thường">★</label>
+                <input type="radio" id="star2" th:field="*{rating}" value="2"><label for="star2" title="Chưa hài lòng">★</label>
+                <input type="radio" id="star1" th:field="*{rating}" value="1"><label for="star1" title="Rất không hài lòng">★</label>
+            </div>
+            <p class="hint">Chọn số sao để đánh giá</p>
+            <p class="error" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></p>
+
+            <div class="form-head second"><span>02</span><h2>Chia sẻ chi tiết</h2></div>
+            <label class="field-label" for="topic">Chủ đề phản hồi <b>*</b></label>
+            <select id="topic" th:field="*{topic}">
+                <option value="">Bạn muốn phản hồi về điều gì?</option>
+                <option value="Chất lượng dịch vụ">Chất lượng dịch vụ</option>
+                <option value="Thái độ phục vụ">Thái độ phục vụ</option>
+                <option value="Giao diện và trải nghiệm">Giao diện và trải nghiệm</option>
+                <option value="Khác">Khác</option>
+            </select>
+            <p class="error" th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}"></p>
+            <label class="field-label" for="message">Nội dung phản hồi <b>*</b></label>
+            <textarea id="message" th:field="*{message}" placeholder="Hãy kể cho chúng tôi nghe trải nghiệm của bạn..." maxlength="1000"></textarea>
+            <div class="textarea-foot"><p class="error" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></p><span>0 / 1000</span></div>
+
+            <div class="form-head second"><span>03</span><h2>Thông tin liên hệ <small>(không bắt buộc)</small></h2></div>
+            <div class="two-col">
+                <div><label class="field-label" for="name">Họ và tên</label><input id="name" th:field="*{name}" placeholder="Nguyễn Văn A"></div>
+                <div><label class="field-label" for="email">Email</label><input id="email" type="email" th:field="*{email}" placeholder="email@example.com"></div>
+            </div>
+            <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            <button class="submit" type="submit">Gửi phản hồi <span>→</span></button>
+            <p class="privacy">Bằng cách gửi, bạn đồng ý để Carely sử dụng phản hồi nhằm cải thiện dịch vụ.</p>
+        </form>
+    </section>
+</main>
+<footer class="container footer"><span>© 2026 Carely</span><span>Designed with care <b>✦</b></span></footer>
+<script>
+    const message = document.getElementById('message');
+    const counter = document.querySelector('.textarea-foot span');
+    if (message && counter) message.addEventListener('input', () => counter.textContent = message.value.length + ' / 1000');
+</script>
+</body>
+</html>

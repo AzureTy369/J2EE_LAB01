@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CV cá nhân của Nguyễn Văn An - Java Backend Developer">
+    <title th:text="${profile.name + ' | ' + profile.role}">Personal CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/cv.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="#top">AN<span>.</span></a>
+    <nav>
+        <a href="#about">Giới thiệu</a>
+        <a href="#experience">Kinh nghiệm</a>
+        <a href="#projects">Dự án</a>
+        <a href="#contact">Liên hệ</a>
+    </nav>
+    <button class="print-button" onclick="window.print()">Tải / In CV <span>↗</span></button>
+</header>
+
+<main id="top">
+    <section class="hero container">
+        <div class="hero-copy">
+            <p class="eyebrow">XIN CHÀO, TÔI LÀ</p>
+            <h1 th:text="${profile.name}">Nguyễn Văn An</h1>
+            <h2 th:text="${profile.role}">Java Backend Developer</h2>
+            <p class="summary" th:text="${profile.summary}">Tóm tắt hồ sơ</p>
+            <div class="hero-actions">
+                <a class="button primary" href="#contact">Kết nối với tôi <span>→</span></a>
+                <a class="button secondary" href="#projects">Xem dự án</a>
+            </div>
+        </div>
+        <div class="avatar-card">
+            <div class="avatar">AN</div>
+            <div class="availability"><i></i> Sẵn sàng cho cơ hội mới</div>
+        </div>
+    </section>
+
+    <section id="about" class="section container">
+        <div class="section-heading"><span>01</span><h3>Thông tin cá nhân</h3></div>
+        <div class="about-grid">
+            <p class="large-copy">Tôi biến những vấn đề phức tạp thành các sản phẩm đơn giản, đáng tin cậy và có giá trị cho người dùng.</p>
+            <div class="contact-list">
+                <p><span>Email</span><a th:href="'mailto:' + ${profile.email}" th:text="${profile.email}">email</a></p>
+                <p><span>Điện thoại</span><strong th:text="${profile.phone}">phone</strong></p>
+                <p><span>Địa điểm</span><strong th:text="${profile.location}">location</strong></p>
+                <p><span>GitHub</span><a th:href="'https://' + ${profile.github}" th:text="${profile.github}">github</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section container">
+        <div class="section-heading"><span>02</span><h3>Kinh nghiệm làm việc</h3></div>
+        <div class="timeline">
+            <article class="timeline-item" th:each="item : ${profile.experiences}">
+                <div class="period" th:text="${item.period}">2024 — nay</div>
+                <div><h4 th:text="${item.position}">Position</h4><p class="company" th:text="${item.company}">Company</p><p th:text="${item.description}">Description</p></div>
+            </article>
+        </div>
+    </section>
+
+    <section id="projects" class="section container">
+        <div class="section-heading"><span>03</span><h3>Dự án tiêu biểu</h3></div>
+        <div class="project-grid">
+            <article class="project-card" th:each="project, stat : ${profile.projects}">
+                <div class="project-top"><span th:text="'0' + ${stat.count}">01</span><a th:href="${project.link}" aria-label="Xem dự án">↗</a></div>
+                <h4 th:text="${project.name}">Project</h4>
+                <p th:text="${project.description}">Description</p>
+                <small th:text="${project.technologies}">Technology</small>
+            </article>
+        </div>
+    </section>
+
+    <section class="section container skills-section">
+        <div class="section-heading"><span>04</span><h3>Kỹ năng</h3></div>
+        <div class="skill-list"><span th:each="skill : ${profile.skills}" th:text="${skill}">Java</span></div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container contact-inner">
+            <p class="eyebrow">BẠN CÓ MỘT DỰ ÁN?</p>
+            <h2>Hãy cùng tạo ra<br><em>điều tuyệt vời.</em></h2>
+            <a class="button light" th:href="'mailto:' + ${profile.email}">Gửi email cho tôi <span>↗</span></a>
+        </div>
+    </section>
+</main>
+<footer class="container footer"><span>© 2026 <b th:text="${profile.name}">Nguyễn Văn An</b></span><span>Built with Spring Boot</span></footer>
+</body>
+</html>
